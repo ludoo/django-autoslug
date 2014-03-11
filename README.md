@@ -21,11 +21,15 @@ class SlugTest(SlugBase):
     >>> s.slug
     'a-e-o'
     >>> s = SlugTest(name='a-e     ò')
-    >>> try:
-    ...     s.save()
-    ... except IntegrityError, e:
-    ...     print e
+    >>> try: s.save()
+    ... except IntegrityError, e: print e
     column slug is not unique
+    >>> s = SlugTest(name='à è ò')
+    >>> try: s.clean()
+    ... except ValidationError, e: print e.message
+    Duplicate slug 'a-e-o'
+    >>> s.slug
+    'a-e-o'
     >>>
     """
     _slug_prepopulate_from = 'name'
