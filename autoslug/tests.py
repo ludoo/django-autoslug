@@ -6,7 +6,7 @@ import doctest
 """
 >>> from django.core.exceptions import ValidationError
 >>> from django.db import IntegrityError
->>> from autoslug.models import SlugTest
+>>> from autoslug.models import SlugTest, SlugTestNonUnique
 >>> 
 >>> s = SlugTest(name='First test')
 >>> repr(s)
@@ -28,7 +28,12 @@ column slug is not unique
 Duplicate slug 'a-e-o'
 >>> s.slug
 'a-e-o'
->>> 
+>>> s1 = SlugTestNonUnique(name='à è ò')
+>>> s1.save()
+>>> s2 = SlugTestNonUnique(name='à è ò')
+>>> s2.save()
+>>> assert s1.slug == s2.slug, (s1.slug, s2.slug)
+>>>
 """
 
 

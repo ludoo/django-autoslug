@@ -28,7 +28,13 @@ class SlugMeta(ModelBase):
         if 'slug' in attrs:
             raise TypeError("A 'slug' field already exists")
 
-        attrs['slug'] = models.CharField(max_length=pre_field.max_length, editable=False, unique=True)
+        if '_slug_field_args' in attrs:
+            args = attrs['_slug_field_args']
+            del attrs['_slug_field_args']
+        else:
+            args = {}
+            
+        attrs['slug'] = models.CharField(max_length=pre_field.max_length, **args)
         attrs['_slug_pre'] = property(lambda s: getattr(s, pre_name))
         
         new_class = super(SlugMeta, cls).__new__(cls, name, bases, attrs)
@@ -74,5 +80,11 @@ class SlugBase(models.Model):
 if 'test' in sys.argv:
 
     class SlugTest(SlugBase):
+        _slug_prepopulate_from = 'name'
+        _slug_field_args = {'unique':True}
+        name = models.CharField(max_length=32, null=True)
+        
+        
+    class SlugTestNonUnique(SlugBase):
         _slug_prepopulate_from = 'name'
         name = models.CharField(max_length=32, null=True)
