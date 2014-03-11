@@ -1,7 +1,7 @@
 Django Auto Slug
 ================
 
-A quick hack to automate all the repetiting tasks involved in writing models that use a unique slug field prepopulated from a CharField:
+A quick hack to automate all the repetitive tasks involved in writing models that use a unique slug field prepopulated from a CharField:
 
 * transliterating and normalizing from text to slug
 * setting the slug on model clean
