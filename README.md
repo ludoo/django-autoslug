@@ -32,6 +32,7 @@ class SlugTest(SlugBase):
     >>>
     """
     _slug_prepopulate_from = 'name'
+    _slug_field_args = {'unique':True}
     name = models.CharField(max_length=32, null=True)
 
 ```
