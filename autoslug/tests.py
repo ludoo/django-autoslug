@@ -1,7 +1,7 @@
 # encoding: utf-8
 
-import unittest
 import doctest
+
 
 """
 >>> from django.core.exceptions import ValidationError

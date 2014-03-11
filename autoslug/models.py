@@ -1,3 +1,5 @@
+import sys
+
 from django.core.exceptions import ValidationError
 from django.db.models.base import ModelBase
 from django.db.models.signals import pre_save
@@ -69,10 +71,8 @@ class SlugBase(models.Model):
         kw['instance']._slug_update()
         
 
-class SlugTest(SlugBase):
-    
-    _slug_prepopulate_from = 'name'
-    
-    name = models.CharField(max_length=32, null=True)
-    
-    
+if 'test' in sys.argv:
+
+    class SlugTest(SlugBase):
+        _slug_prepopulate_from = 'name'
+        name = models.CharField(max_length=32, null=True)
