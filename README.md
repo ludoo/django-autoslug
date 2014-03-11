@@ -1,4 +1,4 @@
-Django Auto Slug
+Django auto slug
 ================
 
 A quick hack to automate all the repetitive tasks involved in writing models that use a unique slug field prepopulated from a CharField:
