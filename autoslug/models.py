@@ -29,12 +29,12 @@ class SlugMeta(ModelBase):
             raise TypeError("A 'slug' field already exists")
 
         if '_slug_field_args' in attrs:
-            args = attrs['_slug_field_args']
+            kw = attrs['_slug_field_args']
             del attrs['_slug_field_args']
         else:
-            args = {}
+            kw = {}
             
-        attrs['slug'] = models.CharField(max_length=pre_field.max_length, **args)
+        attrs['slug'] = models.CharField(max_length=pre_field.max_length, **kw)
         attrs['_slug_pre'] = property(lambda s: getattr(s, pre_name))
         
         new_class = super(SlugMeta, cls).__new__(cls, name, bases, attrs)
